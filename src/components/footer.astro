@@ -1,0 +1,29 @@
+---
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+---
+
+<footer id="main-footer">
+    <div class="container">
+        <p>Design & Desenvolvimento por Filipe Duarte.</p>
+        <p>&copy; {currentYear} <span>&blacksquare;</span> Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+<style>
+    #main-footer {
+        margin: 0 auto;
+        padding: 0 var(--default-spacing);
+    }
+
+    #main-footer span {
+        color: var(--_theme-color-secondary);
+    }
+
+    @media (min-width: 768px) {
+        #main-footer .container {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+</style>

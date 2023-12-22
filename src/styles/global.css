@@ -5,6 +5,10 @@
 }
 
 :root {
+    --max-width: 1270px;
+    --default-spacing: 50px;
+    --header-height: 50px;
+
     --color-primary:        #1A5BE9;
     --color-primary-rgb:    26 91 233;
     --color-secondary:      #8C8C8C;
@@ -50,6 +54,7 @@ body {
     --_theme-color-foreground-rgb:  var(--color-foreground-rgb);
 
     margin: 0;
+    margin-top: calc( var(--header-height) + var(--default-spacing) );
     font-family: var(--font-primary), var(--font-fallback);
     color: var(--_theme-color-foreground);
     background-color: var(--_theme-color-background);
