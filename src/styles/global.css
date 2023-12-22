@@ -1,0 +1,98 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+:root {
+    --color-primary:        #1A5BE9;
+    --color-primary-rgb:    26 91 233;
+    --color-secondary:      #8C8C8C;
+    --color-secondary-rgb:  #8C8C8C;
+    --color-accent:         #00FF85;
+    --color-accent-rgb:     0 255 133;
+    --color-background:     #F0F0F0;
+    --color-background-rgb: 240 240 240;
+    --color-foreground:     #111621;
+    --color-foreground-rgb: 17 22 33;
+    --font-primary:         "Geist";
+    --font-fallback:        "sans-serif";
+}
+
+@font-face {
+    font-family: var(--font-primary);
+    font-weight: 400;
+    src:
+        local("Geist"),
+        url("/fonts/Geist-Regular.otf") format("opentype"),
+        url("/fonts/Geist-Regular.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    src:
+        local("Geist"),
+        url("/fonts/Geist-SemiBold.otf") format("opentype"),
+        url("/fonts/Geist-SemiBold.woff2") format("woff2");
+}
+
+body {
+    --_theme-color-primary:         var(--color-primary);
+    --_theme-color-primary-rgb:     var(--color-primary-rgb);
+    --_theme-color-secondary:       var(--color-secondary);
+    --_theme-color-secondary-rgb:   var(--color-secondary-rgb);
+    --_theme-color-accent:          var(--color-accent);
+    --_theme-color-accent-rgb:      var(--color-accent-rgb);
+    --_theme-color-background:      var(--color-background);
+    --_theme-color-background-rgb:  var(--color-background-rgb);
+    --_theme-color-foreground:      var(--color-foreground);
+    --_theme-color-foreground-rgb:  var(--color-foreground-rgb);
+
+    margin: 0;
+    font-family: var(--font-primary), var(--font-fallback);
+    color: var(--_theme-color-foreground);
+    background-color: var(--_theme-color-background);
+    background-image:
+        url("/img/noise-light.png"),
+        radial-gradient(40% 40% at 50% 100%, rgb( var(--_theme-color-primary-rgb) / 0.75) 0%, rgb( var(--_theme-color-primary-rgb) / 0.4) 33.33%, rgb( var(--_theme-color-primary-rgb) / 0) 100%),
+        radial-gradient(67% 67% at 50% 100%, rgb( var(--_theme-color-accent-rgb) / 0.4) 0%, rgb( var(--_theme-color-accent-rgb) / 0) 100%);
+    background-size: auto, 100vw 100vh, 100vw 100vh;
+    background-position: 0 0;
+    background-repeat: repeat, no-repeat, no-repeat;
+    background-attachment: fixed;
+}
+
+.dark-mode {
+    --_theme-color-primary:         var(--color-accent);
+    --_theme-color-primary-rgb:     var(--color-accent-rgb);
+    --_theme-color-secondary:       var(--color-secondary);
+    --_theme-color-secondary-rgb:   var(--color-secondary-rgb);
+    --_theme-color-accent:          var(--color-primary);
+    --_theme-color-accent-rgb:      var(--color-primary-rgb);
+    --_theme-color-background:      var(--color-foreground);
+    --_theme-color-background-rgb:  var(--color-foreground-rgb);
+    --_theme-color-foreground:      var(--color-background);
+    --_theme-color-foreground-rgb:  var(--color-background-rgb);
+
+    background-image:
+        url("/img/noise-dark.png"),
+        radial-gradient(40% 40% at 50% 100%, rgb( var(--_theme-color-primary-rgb) / 0.25) 0%, rgb( var(--_theme-color-primary-rgb) / 0.15) 33.33%, rgb( var(--_theme-color-primary-rgb) / 0) 100%),
+        radial-gradient(67% 67% at 50% 100%, rgb( var(--_theme-color-accent-rgb) / 0.15) 0%, rgb( var(--_theme-color-accent-rgb) / 0) 100%);
+}
+
+a {
+    font-weight: 600;
+    color: var(--_theme-color-primary);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1280px;
+}

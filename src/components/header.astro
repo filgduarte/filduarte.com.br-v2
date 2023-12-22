@@ -1,0 +1,181 @@
+---
+const lang = "pt";
+const theme = "light";
+---
+
+<header id="main-header">
+    <div class="container">
+        <div id="main-logo">
+            <img src="/img/logo.png" alt="Filipe Duarte">
+        </div>
+        <nav id="main-nav" role="navigation">
+            <button id="menu-toggle" role="presentation" aria-expanded="false" aria-controls="main-menu">
+                <div class="toggle-icon"></div>
+                <div class="toggle-icon"></div>
+                <div class="toggle-icon"></div>
+            </button>
+            <ul id="main-menu">
+                <li class="main-menu__item">
+                    <a href="#">Início</a>
+                </li>
+                <li class="main-menu__item">
+                    <a href="#">Sobre mim</a>
+                </li>
+                <li class="main-menu__item">
+                    <a href="#">Meu trabalho</a>
+                </li>
+                <li class="main-menu__item">
+                    <a href="#">Depoimentos</a>
+                </li>
+                <li class="main-menu__item">
+                    <a href="#">Contato</a>
+                </li>
+                <li class="main-menu__item">
+                    <a href="#">{lang}</a>
+                </li>
+                <li class="main-menu__item">
+                    <a href="#">{theme}</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<style>
+    #main-header {
+        position: fixed;
+        width: 100%;
+        height: 50px;
+        padding: 10px 10px 0;
+        z-index: 9;
+    }
+
+    #main-header::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100px;
+        background-image: linear-gradient(
+                            to bottom,
+                            var(--_theme-color-background) 50%,
+                            rgb(var(--_theme-color-background-rgb) / 0)
+                        );
+    }
+
+    #main-header .container {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+    }
+
+    body.dark-mode #main-logo {
+        background: url("/img/logo-inverted.png") no-repeat;
+    }
+
+    body.dark-mode #main-logo img {
+        opacity: 0;
+    }
+
+    #main-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+    }
+
+    #menu-toggle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        width: 32px;
+        height: 32px;
+        border: none;
+        background: transparent;
+    }
+
+    #menu-toggle div {
+        position: absolute;
+        width: 20px;
+        height: 4px;
+        background: var(--color-foreground);
+    }
+
+    #menu-toggle div:first-child {
+        transform: translateY(-8px);
+    }
+
+    #menu-toggle div:last-child {
+        transform: translateY(8px);
+    }
+
+    #main-menu {
+        margin: 0;
+        list-style-type: none;
+    }
+
+    #main-menu a {
+        color: var(--_theme-color-foreground);
+    }
+
+    @media (max-width: 767px) {
+        #main-menu {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            padding: 10px 0;
+            background-color: var(--_theme-color-background);
+            box-shadow: -5px 5px 15px rgb(var(--_theme-color-foreground-rgb) / 0.05);
+            transform: translateX( calc(100% + 20px) );
+            transition: transform 500ms ease-in-out;
+        }
+
+        #main-menu.active {
+            transform: translateX(0);
+        }
+
+        #main-menu li {
+            padding: 10px 30px;
+            text-align:
+        }
+    }
+
+    @media (min-width: 768px) {
+        #main-header {
+            padding: 10px 50px 0;
+        }
+
+        #menu-toggle {
+            display: none;
+        }
+
+        #main-menu {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 20px;
+            height: 100%;
+            padding: 0 0 1px;
+        }
+
+        .main-menu__item {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .main-menu__item + .main-menu__item::before {
+            content: '';
+            display: block;
+            position: absolute;
+            left: -12px;
+            width: 4px;
+            height: 4px;
+            background-color: var(--_theme-color-secondary);
+        }
+    }
+</style>
