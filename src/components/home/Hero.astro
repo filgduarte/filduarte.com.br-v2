@@ -1,0 +1,45 @@
+<section id="hero">
+    <div class="container grid">
+        <h1 class="grid-element-12-col">
+            Designer<br>
+            & Developer.
+        </h1>
+        <h2 class="grid-element-4-col">
+            Olá, meu nome é Filipe Duarte!<br>
+            Eu torno ideias em <strong>designs atraentes</strong> e então transformo esses designs em <strong>sites funcionais e responsivos.</strong>
+        </h2>
+        <a href="#" class="button button--primary grid-element-3-col">Entre em contato</a>
+    </div>
+</section>
+
+<style>
+    section {
+        height: calc(100vh - var(--header-height) - var(--default-spacing));
+        padding-bottom: var(--default-spacing);
+    }
+
+    section .container {
+        grid-template-rows: 75% auto;
+        align-items: end;
+
+        height: 100%;
+    }
+
+    h1 {
+        font-size: 8rem;
+        font-weight: 600;
+        line-height: 1;
+        letter-spacing: -3px;
+        margin: 0;
+    }
+
+    h2 {
+        font-size: 1.25rem;
+        font-weight: 400;
+        margin: 0;
+    }
+
+    a {
+        --_column-start: 10;
+    }
+</style>

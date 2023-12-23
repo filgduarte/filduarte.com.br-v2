@@ -21,6 +21,7 @@
     --color-foreground-rgb: 17 22 33;
     --font-primary:         "Geist";
     --font-fallback:        "sans-serif";
+    --font-base-size: 16px;
 }
 
 @font-face {
@@ -56,6 +57,7 @@ body {
     margin: 0;
     margin-top: calc( var(--header-height) + var(--default-spacing) );
     font-family: var(--font-primary), var(--font-fallback);
+    font-size: var(--font-base-size);
     color: var(--_theme-color-foreground);
     background-color: var(--_theme-color-background);
     background-image:
@@ -96,8 +98,80 @@ a:hover {
     text-decoration: underline;
 }
 
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    height: 50px;
+    font-size: 1.25rem;
+}
+
+.button--primary {
+    background-color: var(--_theme-color-primary);
+    color: var(--_theme-color-background);
+}
+
 .container {
     margin: 0 auto;
     width: 100%;
     max-width: 1280px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--default-spacing);
+}
+
+.grid-element-1-col {
+    grid-column: var(--_column-start, auto) / span 1;
+}
+
+.grid-element-2-col {
+    grid-column: var(--_column-start, auto) / span 2;
+}
+
+.grid-element-3-col {
+    grid-column: var(--_column-start, auto) / span 3;
+}
+
+.grid-element-4-col {
+    grid-column: var(--_column-start, auto) / span 4;
+}
+
+.grid-element-5-col {
+    grid-column: var(--_column-start, auto) / span 5;
+}
+
+.grid-element-6-col {
+    grid-column: var(--_column-start, auto) / span 6;
+}
+
+.grid-element-6-col {
+    grid-column: var(--_column-start, auto) / span 6;
+}
+
+.grid-element-7-col {
+    grid-column: var(--_column-start, auto) / span 7;
+}
+
+.grid-element-8-col {
+    grid-column: var(--_column-start, auto) / span 8;
+}
+
+.grid-element-9-col {
+    grid-column: var(--_column-start, auto) / span 9;
+}
+
+.grid-element-10-col {
+    grid-column: var(--_column-start, auto) / span 10;
+}
+
+.grid-element-11-col {
+    grid-column: var(--_column-start, auto) / span 11;
+}
+
+.grid-element-12-col {
+    grid-column: var(--_column-start, auto) / span 12;
 }
