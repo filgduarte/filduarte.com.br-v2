@@ -60,14 +60,6 @@ body {
     font-size: var(--font-base-size);
     color: var(--_theme-color-foreground);
     background-color: var(--_theme-color-background);
-    background-image:
-        url("/img/noise-light.png"),
-        radial-gradient(40% 40% at 50% 100%, rgb( var(--_theme-color-primary-rgb) / 0.75) 0%, rgb( var(--_theme-color-primary-rgb) / 0.4) 33.33%, rgb( var(--_theme-color-primary-rgb) / 0) 100%),
-        radial-gradient(67% 67% at 50% 100%, rgb( var(--_theme-color-accent-rgb) / 0.4) 0%, rgb( var(--_theme-color-accent-rgb) / 0) 100%);
-    background-size: auto, 100vw 100vh, 100vw 100vh;
-    background-position: 0 0;
-    background-repeat: repeat, no-repeat, no-repeat;
-    background-attachment: fixed;
 }
 
 .dark-mode {
@@ -86,6 +78,21 @@ body {
         url("/img/noise-dark.png"),
         radial-gradient(40% 40% at 50% 100%, rgb( var(--_theme-color-primary-rgb) / 0.25) 0%, rgb( var(--_theme-color-primary-rgb) / 0.15) 33.33%, rgb( var(--_theme-color-primary-rgb) / 0) 100%),
         radial-gradient(67% 67% at 50% 100%, rgb( var(--_theme-color-accent-rgb) / 0.15) 0%, rgb( var(--_theme-color-accent-rgb) / 0) 100%);
+}
+
+section {
+    height: calc(100vh - var(--header-height) - var(--default-spacing));
+    padding-bottom: var(--default-spacing);
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
 }
 
 a {
