@@ -1,3 +1,7 @@
+/**
+ * GLOBALS
+ */
+
 *,
 *::before,
 *::after {
@@ -7,7 +11,8 @@
 :root {
     --max-width: 1270px;
     --default-spacing: 50px;
-    --header-height: 50px;
+    --header-height: 60px;
+    --particles-base-size: 100px;
 
     --color-primary:        #1A5BE9;
     --color-primary-rgb:    26 91 233;
@@ -42,6 +47,10 @@
         url("/fonts/Geist-SemiBold.woff2") format("woff2");
 }
 
+/**
+ * LAYOUT ELEMENTS
+ */
+
 body {
     --_theme-color-primary:         var(--color-primary);
     --_theme-color-primary-rgb:     var(--color-primary-rgb);
@@ -55,7 +64,6 @@ body {
     --_theme-color-foreground-rgb:  var(--color-foreground-rgb);
 
     margin: 0;
-    margin-top: calc( var(--header-height) + var(--default-spacing) );
     font-family: var(--font-primary), var(--font-fallback);
     font-size: var(--font-base-size);
     color: var(--_theme-color-foreground);
@@ -81,18 +89,50 @@ body {
 }
 
 section {
-    height: calc(100vh - var(--header-height) - var(--default-spacing));
-    padding-bottom: var(--default-spacing);
+    position: relative;
+    min-height: 100vh;
+    height: 100%;
+    padding: calc(var(--header-height) + var(--default-spacing)) 0 var(--default-spacing);
+    box-shadow: inset 0 0 0 2px red;
+    z-index: 1;
+}
+
+/**
+ * TYPOGRAPHY ELEMENTS
+ */
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin-top: 0;
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 3rem;
 }
 
 h2 {
     font-size: 2rem;
-    font-weight: 600;
 }
 
 h3 {
     font-size: 1.5rem;
-    font-weight: 600;
+}
+
+p,
+dl {
+    margin-top: 0;
+    font-size: 1rem;
+    line-height: 1.3;
+}
+
+dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
 }
 
 a {
@@ -105,6 +145,14 @@ a:hover {
     text-decoration: underline;
 }
 
+strong, b {
+    font-weight: 600;
+}
+
+/**
+ * AUXILIARY CLASSES
+ */
+
 .button {
     display: flex;
     justify-content: center;
@@ -116,7 +164,12 @@ a:hover {
 
 .button--primary {
     background-color: var(--_theme-color-primary);
+    background-image: linear-gradient(to top, rgb( var(--color-background-rgb) / 0), rgb( var(--color-background-rgb) / 0.25) );
     color: var(--_theme-color-background);
+}
+
+.button--primary:hover {
+    background-image: linear-gradient(to top, rgb( var(--color-background-rgb) / 0), rgb( var(--color-background-rgb) / 0.4) );
 }
 
 .container {
@@ -181,4 +234,22 @@ a:hover {
 
 .grid-element-12-col {
     grid-column: var(--_column-start, auto) / span 12;
+}
+
+.bg-gradient {
+    --_size: 100vw;
+    --_x: 50%;
+    --_y: 100%;
+
+    position: absolute;
+    top: calc( var(--_size) / -2 );
+    left: calc( var(--_size) / -2 );
+    width: var(--_size);
+    height: var(--_size);
+    background-image:
+        radial-gradient(33.33% 33.33% at 50% 50%, rgb(var(--_theme-color-primary-rgb) / 0.75) 5%, rgb(var(--_theme-color-primary-rgb) / 0.4) 33.33%, rgb(var(--_theme-color-primary-rgb) / 0) 100%),
+        radial-gradient(50% 50% at 50% 50%, rgb(var(--_theme-color-accent-rgb) / 0.4) 0%, rgb(var(--_theme-color-accent-rgb) / 0) 100%);
+    background-repeat: no-repeat;
+    transform: translate( var(--_x), var(--_y) );
+    filter: blur(100px);
 }

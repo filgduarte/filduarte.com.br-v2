@@ -1,0 +1,77 @@
+<div id="following-cursor">
+    <div id="bg-gradient"></div>
+    <div id="bg-noise"></div>
+</div>
+
+<style>
+	#following-cursor {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		z-index: -1;
+	}
+
+	#bg-gradient {
+		--_size: 100vw;
+		--_x: 50%;
+		--_y: 100%;
+
+		position: absolute;
+		top: calc( var(--_size) / -2 );
+		left: calc( var(--_size) / -2 );
+		width: var(--_size);
+		height: var(--_size);
+		background-image:
+			radial-gradient(33.33% 33.33% at 50% 50%, rgb(var(--_theme-color-primary-rgb) / 0.75) 5%, rgb(var(--_theme-color-primary-rgb) / 0.4) 33.33%, rgb(var(--_theme-color-primary-rgb) / 0) 100%),
+        	radial-gradient(50% 50% at 50% 50%, rgb(var(--_theme-color-accent-rgb) / 0.4) 0%, rgb(var(--_theme-color-accent-rgb) / 0) 100%);
+		background-repeat: no-repeat;
+		transform: translate( var(--_x), var(--_y) );
+		filter: blur(100px);
+	}
+
+	#bg-noise {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		background-image: url("/img/noise-light.png");
+	}
+</style>
+
+<script>
+	const bgGradient = document.getElementById('bg-gradient');
+	const speed = 0.05;
+	let cursorPosition = {
+		x: window.innerWidth / 2,
+		y: window.innerHeight,
+	};
+	let bgGradientPosition = {
+		x: 0,
+		y: 0,
+	}
+
+	function updateCursorPosition(event) {
+		cursorPosition.x = event.clientX;
+		cursorPosition.y = event.clientY;
+	}
+
+	function animateBGGradient() {
+		bgGradientPosition.x += (cursorPosition.x - bgGradientPosition.x) * speed;
+        bgGradientPosition.y += (cursorPosition.y - bgGradientPosition.y) * speed;
+
+		bgGradient.style.setProperty("--_x", `${bgGradientPosition.x}px`);
+		bgGradient.style.setProperty("--_y", `${bgGradientPosition.y}px`);
+		
+		requestAnimationFrame(animateBGGradient);
+	}
+
+	document.addEventListener('mousemove', updateCursorPosition);
+
+	requestAnimationFrame(animateBGGradient);
+</script>

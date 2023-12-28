@@ -1,0 +1,167 @@
+---
+    const {type, top, right, bottom, left} = Astro.props;
+    const position = {top, right, bottom, left};
+---
+
+<div class={type} style={
+    Object.entries(position)
+        .filter(([pos, value]) => value !== undefined)
+        .reduce
+        (
+            (acc, [pos, value]) => acc + `--_${pos}: ${value};`, ''
+        )
+}></div>
+
+
+<style is:global>
+/* Appearence */
+
+.square {
+    width: var(--_particles-base-size);
+    height: var(--_particles-base-size);
+}
+
+.arc {
+    width: calc( var(--_particles-base-size) * 2.5);
+    height: calc( var(--_particles-base-size) * 2.5);
+}
+
+.arc--1 {
+    border-bottom: none;
+    border-left: none;
+    border-radius: 0 100% 0 0;
+    mask-image: radial-gradient(
+        circle at bottom left,
+        transparent calc(var(--_particles-base-size) * 1.5),
+        black calc(var(--_particles-base-size) * 1.51)
+    );
+}
+
+.arc--2 {
+    border-bottom: none;
+    border-right: none;
+    border-radius: 100% 0 0 0;
+    background-image:
+        url('/img/noise-light.png'),
+        linear-gradient(135deg, rgb( var(--_theme-color-background-rgb) / 0.75 ) 25%, transparent 70%);
+    mask-image: radial-gradient(
+        circle at bottom right,
+        transparent calc(var(--_particles-base-size) * 1.5),
+        black calc(var(--_particles-base-size) * 1.51)
+    );
+}
+
+.arc--3 {
+    border-top: none;
+    border-right: none;
+    border-radius: 0 0 0 100%;
+    mask-image: radial-gradient(
+        circle at top right,
+        transparent calc(var(--_particles-base-size) * 1.5),
+        black calc(var(--_particles-base-size) * 1.51)
+    );
+}
+
+.arc--4 {
+    border-top: none;
+    border-left: none;
+    border-radius: 0 0 100% 0;
+    background-image:
+        url('/img/noise-light.png'),
+        linear-gradient(135deg, rgb( var(--_theme-color-background-rgb) / 0.75 ) 30%, transparent 75%);
+    mask-image: radial-gradient(
+        circle at top left,
+        transparent calc(var(--_particles-base-size) * 1.5),
+        black calc(var(--_particles-base-size) * 1.51)
+    );
+}
+
+.twins {
+    box-shadow: var(--_x, 0) var(--_y, 0) 0 rgb(var(--_theme-color-accent-rgb) / .5),
+                var(--_x1, 0) var(--_y1, 0) 0 rgb(var(--_theme-color-accent-rgb) / .5);
+}
+
+.twin-top {
+    --_y: calc( var(--_particles-base-size) * -1);
+}
+
+.twin-top-right {
+    --_x: var(--_particles-base-size);
+    --_y: calc( var(--_particles-base-size) * -1);
+}
+
+.twin-right {
+    --_x: var(--_particles-base-size);
+}
+
+.twin-bottom-right {
+    --_x: var(--_particles-base-size);
+    --_y: var(--_particles-base-size);
+}
+
+.twin-bottom {
+    --_y: var(--_particles-base-size);
+}
+
+.twin-bottom-left {
+    --_x: calc( var(--_particles-base-size) * -1);
+    --_y: var(--_particles-base-size);
+}
+
+.twin-left {
+    --_x: calc( var(--_particles-base-size) * -1);
+}
+
+.twin-top-left {
+    --_x: calc( var(--_particles-base-size) * -1);
+    --_y: calc( var(--_particles-base-size) * -1);
+}
+
+.triplet-top {
+    --_y1: calc( var(--_particles-base-size) * -1);
+}
+
+.triplet-top-right {
+    --_x1: var(--_particles-base-size);
+    --_y1: calc( var(--_particles-base-size) * -1);
+}
+
+.triplet-right {
+    --_x1: var(--_particles-base-size);
+}
+
+.triplet-bottom-right {
+    --_x1: var(--_particles-base-size);
+    --_y1: var(--_particles-base-size);
+}
+
+.triplet-bottom {
+    --_y1: var(--_particles-base-size);
+}
+
+.triplet-bottom-left {
+    --_x1: calc( var(--_particles-base-size) * -1);
+    --_y1: var(--_particles-base-size);
+}
+
+.triplet-left {
+    --_x1: calc( var(--_particles-base-size) * -1);
+}
+
+.triplet-top-left {
+    --_x1: calc( var(--_particles-base-size) * -1);
+    --_y1: calc( var(--_particles-base-size) * -1);
+}
+
+/* Animation */
+
+/* @keyframes float {
+    0%,
+    100% {
+        transform: translateY(20px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+} */
+</style>

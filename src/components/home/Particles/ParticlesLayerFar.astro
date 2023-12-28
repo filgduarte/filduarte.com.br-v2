@@ -1,0 +1,110 @@
+---
+import ParticlesLayer from "../../../layouts/ParticlesLayer.astro";
+import Particle from "./Particle.astro";
+---
+
+<ParticlesLayer depth="far">
+    <!-- HERO  -->
+    <Particle
+        type="square"
+        top="25vh"
+        left="var(--default-spacing)"
+    />
+    <Particle
+        type="arc arc--3"
+        top="18vh"
+        left="28vw"
+    />
+    <Particle
+		type="square twins twin-bottom-right"
+		top="30vh"
+		left="64vw"
+	/>
+    <Particle
+		type="arc arc--1"
+		top="50vh"
+		left="47vw"
+	/>
+    <Particle
+		type="square twins twin-bottom-left"
+		top="65vh"
+		right="0"
+	/>
+    <Particle
+		type="arc arc--1"
+		top="75vh"
+		left="70vw"
+	/>
+    <Particle
+		type="square"
+		top="calc(75vh + var(--_particles-base-size) * 2.5 * var(--_scale))"
+		left="calc(70vw + var(--_particles-base-size) * 2.5 * var(--_scale))"
+	/>
+    <Particle
+		type="square twins twin-top-left triplet-top-right"
+		top="calc(100vh - var(--default-spacing) - var(--_particles-base-size) * var(--_scale))"
+		left="calc(50%)"
+	/>
+
+	<!-- ABOUT -->
+    <Particle
+		type="square"
+		top="0"
+		left="0"
+	/>
+    <Particle
+		type="arc arc--4"
+		top="0"
+		left="0"
+	/>
+    <Particle
+		type="square twins twin-bottom-right"
+		top="0"
+		left="0"
+	/>
+    <Particle
+		type="square twins twin-top-right triplet-left"
+		top="0"
+		left="0"
+	/>
+    <Particle
+		type="arc arc--2"
+		top="0"
+		left="0"
+	/>
+    <Particle
+		type="square"
+		top="0"
+		left="0"
+	/>
+    <Particle
+		type="square"
+		top="0"
+		left="0"
+	/>
+    <Particle
+		type="square"
+		top="0"
+		left="0"
+	/>
+    <Particle
+		type="square twins twin-top-right triplet-bottom"
+		top="0"
+		left="0"
+	/>
+    <Particle
+		type="arc arc--2"
+		top="0"
+		left="0"
+	/>
+    <Particle
+		type="arc arc--2"
+		top="0"
+		left="0"
+	/>
+    <Particle
+		type="arc arc--4"
+		top="0"
+		left="0"
+	/>
+</ParticlesLayer>

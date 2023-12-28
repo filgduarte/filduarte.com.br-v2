@@ -1,0 +1,35 @@
+---
+import ParticlesLayer from "../../../layouts/ParticlesLayer.astro";
+import Particle from "./Particle.astro";
+---
+
+<ParticlesLayer depth="close">
+	<!-- HERO -->
+    <Particle
+		type="square"
+		top="var(--header-height)"
+		left="40%"
+	/>
+    <Particle
+		type="arc arc--4"
+		top="25vh"
+		right="var(--default-spacing)"
+	/>
+    <Particle
+		type="square"
+		top="68vh"
+		left="23vw"
+	/>
+
+	<!-- ABOUT -->
+    <Particle
+		type="square"
+		top="calc(135vh + ( var(--_particles-base-size) * 4) )"
+		left="20%"
+	/>
+    <Particle
+		type="square"
+		top="110vh"
+		right="10%"
+	/>
+</ParticlesLayer>
