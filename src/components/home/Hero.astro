@@ -44,3 +44,41 @@
         --_column-start: 10;
     }
 </style>
+
+<script>
+    import { gsap } from "gsap";
+    import SplitType from "split-type";
+
+    const title = new SplitType('#hero h1', { types: 'lines, words' });
+    const subtitle = new SplitType('#hero h2', { types: 'chars' });
+
+    title.lines.forEach(line => {
+        const lineWrapper = document.createElement('div');
+        lineWrapper.classList.add('line-content');
+        line.style.overflow = 'hidden';
+
+        while (line.firstChild) {
+            lineWrapper.appendChild(line.firstChild);
+        }
+
+        line.appendChild(lineWrapper);
+    });
+
+    gsap.from('#hero .line-content', {
+        y: '100%',
+        duration: 0.5,
+        stagger: 0.25,
+        onComplete: () => {
+            title.lines.forEach(line => {
+                line.style.overflow = 'visible';
+            })
+        }
+    });
+
+    gsap.from(subtitle.chars, {
+        opacity: 0,
+        duration: 0.5,
+        stagger: 0.01,
+        delay: 0.3
+    });
+</script>
