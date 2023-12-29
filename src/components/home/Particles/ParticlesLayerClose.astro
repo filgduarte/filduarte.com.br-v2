@@ -3,7 +3,7 @@ import ParticlesLayer from "../../../layouts/ParticlesLayer.astro";
 import Particle from "./Particle.astro";
 ---
 
-<ParticlesLayer depth="close">
+<ParticlesLayer depth="close" speed=".25">
 	<!-- HERO -->
     <Particle
 		type="square"
@@ -24,12 +24,17 @@ import Particle from "./Particle.astro";
 	<!-- ABOUT -->
     <Particle
 		type="square"
-		top="calc(135vh + ( var(--_particles-base-size) * 4) )"
-		left="20%"
+		top="145vh"
+		left="5%"
 	/>
-    <Particle
-		type="square"
-		top="110vh"
-		right="10%"
+	<Particle
+	type="square"
+		top="195vh"
+		left="30%"
+	/>
+	<Particle
+		type="arc arc--1"
+		top="145vh"
+		right="3%"
 	/>
 </ParticlesLayer>

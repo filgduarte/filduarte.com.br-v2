@@ -1,8 +1,8 @@
 ---
-    const {depth} = Astro.props;
+    const {depth, speed} = Astro.props;
 ---
 
-<div class={`particles layer layer--${depth}`}>
+<div class={`particles layer layer--${depth}`} data-speed={speed}>
     <slot />
 </div>
 
@@ -37,6 +37,8 @@
     }
 
     .layer div {
+        --_animation-duration: 10s;
+
         position: absolute;
         top: var(--_top, auto);
         right: var(--_right, auto);
@@ -48,7 +50,7 @@
             linear-gradient(135deg, rgb( var(--_theme-color-background-rgb) / 0.75 ), transparent);
         transform-origin: 0 0;
         scale: var(--_scale, 1);
-        animation: float 10s ease-in-out infinite;
+        animation: float var(--_animation-duration) ease-in-out infinite;
         animation-delay: var(--_delay, 0);
     }
 
@@ -59,4 +61,24 @@
     .layer--closest * {
         --_scale: 2;
     }
+
+    /* .layer--close *,
+    .layer--closest * {
+        backdrop-filter: blur(2px);
+    } */
 </style>
+
+<script>
+    import { gsap } from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.to('.layer', {
+        scrollTrigger: {
+            scrub: true
+        },
+        y: (i, target) => -ScrollTrigger.maxScroll(window) * target.dataset.speed,
+        ease: 'none'
+    });
+</script>

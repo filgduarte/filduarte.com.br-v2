@@ -3,7 +3,7 @@ import ParticlesLayer from "../../../layouts/ParticlesLayer.astro";
 import Particle from "./Particle.astro";
 ---
 
-<ParticlesLayer depth="far">
+<ParticlesLayer depth="far" speed="-0.5">
     <!-- HERO  -->
     <Particle
         type="square"
@@ -49,34 +49,41 @@ import Particle from "./Particle.astro";
 	<!-- ABOUT -->
     <Particle
 		type="square"
-		top="0"
-		left="0"
-	/>
-    <Particle
-		type="arc arc--4"
-		top="0"
-		left="0"
-	/>
-    <Particle
-		type="square twins twin-bottom-right"
-		top="0"
-		left="0"
+		top="calc(100vh + 6%)"
+		left="80vw"
 	/>
     <Particle
 		type="square twins twin-top-right triplet-left"
-		top="0"
-		left="0"
+		top="120vh"
+		left="7vw"
+	/>
+    <Particle
+		type="arc arc--1"
+		top="calc(100vh + 2%)"
+		left="30vw"
+	/>
+    <Particle
+		type="square twins twin-bottom-right"
+		top="calc(100vh + 7%)"
+		left="50vw"
 	/>
     <Particle
 		type="arc arc--2"
-		top="0"
-		left="0"
+		top="calc(100vh + 12%)"
+		left="20vw"
 	/>
     <Particle
-		type="square"
-		top="0"
-		left="0"
+		type="arc arc--1"
+		top="185vh"
+		left="85vw"
 	/>
+	<Particle
+		type="square"
+		top="180vh"
+		left="55vw"
+	/>
+
+	<!-- Work -->
     <Particle
 		type="square"
 		top="0"
@@ -89,11 +96,6 @@ import Particle from "./Particle.astro";
 	/>
     <Particle
 		type="square twins twin-top-right triplet-bottom"
-		top="0"
-		left="0"
-	/>
-    <Particle
-		type="arc arc--2"
 		top="0"
 		left="0"
 	/>
