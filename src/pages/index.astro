@@ -33,20 +33,36 @@ import ParticlesLayerClosest from '../components/home/Particles/ParticlesLayerCl
 	const particlesLayers = document.querySelectorAll('.layer');
 	const particlesElements = document.querySelectorAll('.layer div');
 
+	function setLayersHeight(layers) {
+		const pageHeight = Math.max(
+			document.body.scrollHeight,
+			document.body.offsetHeight,
+			document.documentElement.clientHeight,
+			document.documentElement.scrollHeight,
+			document.documentElement.offsetHeight
+		);
+
+		for (const layer of layers) {
+			const parallaxSpeed = parseFloat(layer.dataset.speed) ?? 0;
+			layer.style.height = (pageHeight * parallaxSpeed) + 'px';
+		}
+	}
+
+	function setParticlesDelay(particles) {
+		for (const particle of particles) {
+			const duration = getComputedStyle(particle).getPropertyValue('animation-duration');
+			const delay = parseInt(duration) * Math.random() * -1;
+	
+			particle.style.setProperty('--_delay', delay + 's');
+		}
+	}
+
 	function raf(time) {
 		lenis.raf(time)
 		requestAnimationFrame(raf);
 	}
+
+	setLayersHeight(particlesLayers);
+	setParticlesDelay(particlesElements);
 	requestAnimationFrame(raf);
-
-	for (const layer of particlesLayers) {
-		layer.style.height = document.getElementById('home').offsetHeight + 'px';
-	}
-
-    for (const particle of particlesElements) {
-		const duration = getComputedStyle(particle).getPropertyValue('animation-duration');
-		const delay = parseInt(duration) * Math.random() * -1;
-
-		particle.style.setProperty('--_delay', delay + 's');
-	}
 </script>

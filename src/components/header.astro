@@ -34,7 +34,7 @@ const theme = "light";
                 <li class="main-menu__item">
                     <a href="#">{lang}</a>
                 </li>
-                <li class="main-menu__item">
+                <li class="main-menu__item toggle-theme">
                     <a href="#">{theme}</a>
                 </li>
             </ul>
@@ -175,3 +175,16 @@ const theme = "light";
         }
     }
 </style>
+
+<script>
+    const themeToggler = document.querySelector('.toggle-theme');
+    
+    function toggleTheme() {
+        document.body.classList.toggle('dark-mode');
+        const linkText = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+
+        themeToggler.querySelector('a').innerHTML = linkText;
+    }
+
+    themeToggler.addEventListener('click', toggleTheme);
+</script>

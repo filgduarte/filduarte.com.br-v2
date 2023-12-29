@@ -1,7 +1,138 @@
 <section id="work">
     <div class="container grid">
-        <div class="grid-element-5-col">
-            <h2>Mais que trabalhos, esses projetos contam um pouco da minha história.</h2>
+        <h2 class="title | grid-element-5-col">Mais que trabalhos, esses projetos contam um pouco da minha história.</h2>
+        <div class="work-list | grid-element-12-col grid">
+            <div class="work-item | grid-element-4-col" style="--_column-start: 1;">
+                <a href="/work/filipe-duarte">
+                    <h3>Filipe Duarte</h3>
+                    <ul class="tag-list">
+                        <li class="tag">Brand design</li>
+                        <li class="tag">Web design</li>
+                        <li class="tag">HTML</li>
+                        <li class="tag">CSS</li>
+                        <li class="tag">Javascript</li>
+                        <li class="tag">Astro</li>
+                        <li class="tag">GSAP</li>
+                    </ul>
+                </a>
+            </div>
+            <div class="grid-element-4-col work-item">
+                <a href="/work/verao-mais-elas">
+                    <h3>Verão+Elas</h3>
+                    <ul class="tag-list">
+                        <li class="tag">Web design</li>
+                        <li class="tag">Wordpress</li>
+                        <li class="tag">Elementor</li>
+                        <li class="tag">CSS</li>
+                    </ul>
+                </a>
+            </div>
+            <div class="grid-element-4-col work-item">
+                <a href="/work/raizen">
+                    <h3>Raízen</h3>
+                    <ul class="tag-list">
+                        <li class="tag">Motion design</li>
+                    </ul>
+                </a>
+            </div>
+            <div class="grid-element-4-col work-item">
+                <a href="/work/grafica-impacto">
+                    <h3>Gráfica Impacto</h3>
+                    <ul class="tag-list">
+                        <li class="tag">UI design</li>
+                        <li class="tag">HTML</li>
+                        <li class="tag">CSS</li>
+                        <li class="tag">Javascript</li>
+                        <li class="tag">Chrome extension</li>
+                    </ul>
+                </a>
+            </div>
+            <div class="grid-element-4-col work-item">
+                <a href="/work/kanban-tracker">
+                    <h3>Kanban Tracker</h3>
+                    <ul class="tag-list">
+                        <li class="tag">UI design</li>
+                        <li class="tag">HTML</li>
+                        <li class="tag">CSS</li>
+                        <li class="tag">Typescript</li>
+                        <li class="tag">React JS</li>
+                    </ul>
+                </a>
+            </div>
         </div>
     </div>
 </section>
+
+<style>
+
+    .work-item {
+        --_gap: calc(var(--default-spacing) / 10);
+
+        position: relative;
+        aspect-ratio: 1;
+    }
+
+    a {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        height: 100%;
+        padding: calc(var(--default-spacing) / 2);
+        color: var(--_theme-color-foreground);
+        background-color: var(--_theme-color-secondary);
+        transition: transform 500ms ease;
+    }
+
+    a :is(h3, ul) {
+        opacity: 0;
+        transition: opacity 500ms ease;
+    }
+
+    a:hover {
+        text-decoration: none;
+        transform: scale(1.05);
+    }
+
+    a:hover :is(h3, ul) {
+        opacity: 1;
+    }
+
+    h3 {
+        margin-bottom: var(--_gap);
+    }
+
+    .tag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--_gap);
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+        font-size: 0.75rem;
+    }
+
+    .tag {
+        padding: 2px var(--_gap);
+        color: var(--_theme-color-background);
+        background-color: var(--_theme-color-primary);
+    }
+</style>
+
+<script>
+    import { gsap } from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    ScrollTrigger.create({
+        trigger: '#work',
+        pin: '.title',
+        pinSpacing: false,
+        start: 'top top',
+        endTrigger: '.work-list',
+        end: () => {
+            const titleElement = document.querySelector('#work .title');
+            return `bottom +=${titleElement.offsetTop + titleElement.offsetHeight}`;
+        },
+    });
+</script>
