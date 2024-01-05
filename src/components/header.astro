@@ -43,12 +43,12 @@ const theme = "light";
 </header>
 
 <style>
-    #main-header {
+    header {
         position: fixed;
         top: 0;
         width: 100%;
         height: var(--header-height);
-        padding: 10px 50px;
+        padding: 10px var(--default-spacing);
         z-index: 9;
     }
 
@@ -64,7 +64,7 @@ const theme = "light";
 
     } */
 
-    #main-header .container {
+    header .container {
         position: relative;
         display: flex;
         justify-content: space-between;
@@ -80,7 +80,7 @@ const theme = "light";
         opacity: 0;
     }
 
-    #main-nav {
+    nav {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -179,11 +179,15 @@ const theme = "light";
 <script>
     const themeToggler = document.querySelector('.toggle-theme');
     
-    function toggleTheme() {
+    function toggleTheme(e) {
+        e.preventDefault();
+
         document.body.classList.toggle('dark-mode');
         const linkText = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
 
         themeToggler.querySelector('a').innerHTML = linkText;
+
+        return false;
     }
 
     themeToggler.addEventListener('click', toggleTheme);

@@ -20,6 +20,9 @@
 		--_size: 100vw;
 		--_x: 50%;
 		--_y: 100%;
+		--_color-primary-percentage-start: 0.75;
+		--_color-primary-percentage-middle: 0.4;
+		--_color-accent-percentage-start: 0.4;
 
 		position: absolute;
 		top: calc( var(--_size) / -2 );
@@ -27,11 +30,26 @@
 		width: var(--_size);
 		height: var(--_size);
 		background-image:
-			radial-gradient(33.33% 33.33% at 50% 50%, rgb(var(--_theme-color-primary-rgb) / 0.75) 5%, rgb(var(--_theme-color-primary-rgb) / 0.4) 33.33%, rgb(var(--_theme-color-primary-rgb) / 0) 100%),
-        	radial-gradient(50% 50% at 50% 50%, rgb(var(--_theme-color-accent-rgb) / 0.4) 0%, rgb(var(--_theme-color-accent-rgb) / 0) 100%);
+			radial-gradient(
+				33.33% 33.33% at 50% 50%,
+				rgb( var( --_theme-color-primary-rgb) / var(--_color-primary-percentage-start) ) 5%,
+				rgb( var(--_theme-color-primary-rgb) / var(--_color-primary-percentage-middle) ) 33.33%,
+				rgb( var(--_theme-color-primary-rgb) / 0) 100%
+			),
+        	radial-gradient(
+				50% 50% at 50% 50%,
+				rgb( var(--_theme-color-accent-rgb) / var(--_color-accent-percentage-start) ) 0%,
+				rgb( var(--_theme-color-accent-rgb) / 0 ) 100%
+			);
 		background-repeat: no-repeat;
 		transform: translate( var(--_x), var(--_y) );
 		filter: blur(100px);
+	}
+
+	body.dark-mode #bg-gradient {
+		--_color-primary-percentage-start: 0.3;
+		--_color-primary-percentage-middle: 0.15;
+		--_color-accent-percentage-start: 0.3;
 	}
 
 	#bg-noise {

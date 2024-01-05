@@ -5,64 +5,19 @@ import About from '../components/home/About.astro';
 import Work from '../components/home/Work.astro';
 import Testimonials from '../components/home/Testimonials.astro';
 import Contact from '../components/home/Contact.astro';
-import FollowingCursor from '../components/home/FollowingCursor.astro';
 import ParticlesLayerFar from '../components/home/Particles/ParticlesLayerFar.astro';
 import ParticlesLayerClose from '../components/home/Particles/ParticlesLayerClose.astro';
 import ParticlesLayerClosest from '../components/home/Particles/ParticlesLayerClosest.astro';
 ---
 
-<Layout title="Filipe Duarte">
-	<FollowingCursor />
-	<main id="home">
-		<Hero />
-		<About />
-		<Work />
-		<Testimonials />
-		<Contact />
+<Layout title="Filipe Duarte" id="home">
+	<Hero />
+	<About />
+	<Work />
+	<Testimonials />
+	<Contact />
 
-		<ParticlesLayerFar />
-		<ParticlesLayerClose />
-		<ParticlesLayerClosest />
-	</main>
+	<ParticlesLayerFar />
+	<ParticlesLayerClose />
+	<ParticlesLayerClosest />
 </Layout>
-
-<script>
-	import Lenis from '@studio-freight/lenis';
-
-	const lenis = new Lenis();
-	const particlesLayers = document.querySelectorAll('.layer');
-	const particlesElements = document.querySelectorAll('.layer div');
-
-	function setLayersHeight(layers) {
-		const pageHeight = Math.max(
-			document.body.scrollHeight,
-			document.body.offsetHeight,
-			document.documentElement.clientHeight,
-			document.documentElement.scrollHeight,
-			document.documentElement.offsetHeight
-		);
-
-		for (const layer of layers) {
-			const parallaxSpeed = parseFloat(layer.dataset.speed) ?? 0;
-			layer.style.height = (pageHeight * parallaxSpeed) + 'px';
-		}
-	}
-
-	function setParticlesDelay(particles) {
-		for (const particle of particles) {
-			const duration = getComputedStyle(particle).getPropertyValue('animation-duration');
-			const delay = parseInt(duration) * Math.random() * -1;
-	
-			particle.style.setProperty('--_delay', delay + 's');
-		}
-	}
-
-	function raf(time) {
-		lenis.raf(time)
-		requestAnimationFrame(raf);
-	}
-
-	setLayersHeight(particlesLayers);
-	setParticlesDelay(particlesElements);
-	requestAnimationFrame(raf);
-</script>

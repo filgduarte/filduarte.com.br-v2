@@ -9,15 +9,15 @@
 }
 
 :root {
-    --max-width: 1270px;
-    --default-spacing: 50px;
+    --max-width: min(1270px, 100vw);
+    --default-spacing: 30px;
     --header-height: 60px;
     --particles-base-size: 100px;
 
     --color-primary:        #1A5BE9;
     --color-primary-rgb:    26 91 233;
     --color-secondary:      #8C8C8C;
-    --color-secondary-rgb:  #8C8C8C;
+    --color-secondary-rgb:  140 140 140;
     --color-accent:         #00FF85;
     --color-accent-rgb:     0 255 133;
     --color-background:     #F0F0F0;
@@ -27,6 +27,12 @@
     --font-primary:         "Geist";
     --font-fallback:        "sans-serif";
     --font-base-size: 16px;
+}
+
+@media (min-width: 1024px) {
+    :root {
+        --default-spacing: 50px;
+    }
 }
 
 @font-face {
@@ -65,10 +71,13 @@ body {
     --_theme-noise-background: url("/img/noise-light.png");
 
     margin: 0;
+    max-width: 100vw;
+    overflow-x: hidden;
     font-family: var(--font-primary), var(--font-fallback);
     font-size: var(--font-base-size);
     color: var(--_theme-color-foreground);
     background-color: var(--_theme-color-background);
+    transition: background-color 300ms, color 300ms;
 }
 
 .dark-mode {
@@ -135,6 +144,7 @@ a {
     font-weight: 600;
     color: var(--_theme-color-primary);
     text-decoration: none;
+    transition: color 300ms;
 }
 
 a:hover {
@@ -143,6 +153,15 @@ a:hover {
 
 strong, b {
     font-weight: 600;
+}
+
+input,
+textarea,
+button,
+select {
+    padding: 0.75rem 1rem;
+    font-family: var(--font-primary) var(--font-fallback);
+    font-size: 1rem;
 }
 
 /**
@@ -154,14 +173,18 @@ strong, b {
     justify-content: center;
     align-items: center;
     padding: 10px;
+    min-width: calc( var(--default-spacing) * 5 );
     height: 50px;
     font-size: 1.25rem;
+    font-weight: 600;
+    border: none;
 }
 
 .button--primary {
     background-color: var(--_theme-color-primary);
     background-image: linear-gradient(to top, rgb( var(--color-background-rgb) / 0), rgb( var(--color-background-rgb) / 0.25) );
     color: var(--_theme-color-background);
+    transition: background-color 300ms, color 300ms;
 }
 
 .button--primary:hover {
@@ -174,78 +197,77 @@ strong, b {
     max-width: 1280px;
 }
 
+.flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex--wrap {
+    flex-wrap: wrap;
+}
+
 .grid {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
     gap: var(--default-spacing);
 }
 
-.grid-element-1-col {
-    grid-column: var(--_column-start, auto) / span 1;
+@media (min-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(12, 1fr);
+    }
+    .grid-element-1-col {
+        grid-column: var(--_column-start, auto) / span 1;
+    }
+    
+    .grid-element-2-col {
+        grid-column: var(--_column-start, auto) / span 2;
+    }
+    
+    .grid-element-3-col {
+        grid-column: var(--_column-start, auto) / span 3;
+    }
+    
+    .grid-element-4-col {
+        grid-column: var(--_column-start, auto) / span 4;
+    }
+    
+    .grid-element-5-col {
+        grid-column: var(--_column-start, auto) / span 5;
+    }
+    
+    .grid-element-6-col {
+        grid-column: var(--_column-start, auto) / span 6;
+    }
+    
+    .grid-element-6-col {
+        grid-column: var(--_column-start, auto) / span 6;
+    }
+    
+    .grid-element-7-col {
+        grid-column: var(--_column-start, auto) / span 7;
+    }
+    
+    .grid-element-8-col {
+        grid-column: var(--_column-start, auto) / span 8;
+    }
+    
+    .grid-element-9-col {
+        grid-column: var(--_column-start, auto) / span 9;
+    }
+    
+    .grid-element-10-col {
+        grid-column: var(--_column-start, auto) / span 10;
+    }
+    
+    .grid-element-11-col {
+        grid-column: var(--_column-start, auto) / span 11;
+    }
+    
+    .grid-element-12-col {
+        grid-column: var(--_column-start, auto) / span 12;
+    }
 }
 
-.grid-element-2-col {
-    grid-column: var(--_column-start, auto) / span 2;
-}
-
-.grid-element-3-col {
-    grid-column: var(--_column-start, auto) / span 3;
-}
-
-.grid-element-4-col {
-    grid-column: var(--_column-start, auto) / span 4;
-}
-
-.grid-element-5-col {
-    grid-column: var(--_column-start, auto) / span 5;
-}
-
-.grid-element-6-col {
-    grid-column: var(--_column-start, auto) / span 6;
-}
-
-.grid-element-6-col {
-    grid-column: var(--_column-start, auto) / span 6;
-}
-
-.grid-element-7-col {
-    grid-column: var(--_column-start, auto) / span 7;
-}
-
-.grid-element-8-col {
-    grid-column: var(--_column-start, auto) / span 8;
-}
-
-.grid-element-9-col {
-    grid-column: var(--_column-start, auto) / span 9;
-}
-
-.grid-element-10-col {
-    grid-column: var(--_column-start, auto) / span 10;
-}
-
-.grid-element-11-col {
-    grid-column: var(--_column-start, auto) / span 11;
-}
-
-.grid-element-12-col {
-    grid-column: var(--_column-start, auto) / span 12;
-}
-
-.bg-gradient {
-    --_size: 100vw;
-    --_x: 50%;
-    --_y: 100%;
-
-    position: absolute;
-    top: calc( var(--_size) / -2 );
-    left: calc( var(--_size) / -2 );
-    width: var(--_size);
-    height: var(--_size);
-    background-image:
-        radial-gradient(33.33% 33.33% at 50% 50%, rgb(var(--_theme-color-primary-rgb) / 0.75) 5%, rgb(var(--_theme-color-primary-rgb) / 0.4) 33.33%, rgb(var(--_theme-color-primary-rgb) / 0) 100%),
-        radial-gradient(50% 50% at 50% 50%, rgb(var(--_theme-color-accent-rgb) / 0.4) 0%, rgb(var(--_theme-color-accent-rgb) / 0) 100%);
-    background-repeat: no-repeat;
-    transform: translate( var(--_x), var(--_y) );
-    filter: blur(100px);
+.line {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 103%, 0% 103%);
 }

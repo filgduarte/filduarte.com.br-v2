@@ -61,53 +61,39 @@
     import { gsap } from "gsap";
     import { ScrollTrigger } from 'gsap/ScrollTrigger';
     import SplitType from "split-type";
+    import { wrapChildren } from '../../script/script';
     
     gsap.registerPlugin(ScrollTrigger);
 
     const titleSelector = '#about h2';
     const title = new SplitType(titleSelector, { types: 'lines' });
-
-    title.lines.forEach(line => {
-        const lineWrapper = document.createElement('div');
-        lineWrapper.classList.add('line-content');
-        line.style.overflow = 'hidden';
-
-        while (line.firstChild) {
-            lineWrapper.appendChild(line.firstChild);
+    const timeline = gsap.timeline({
+        scrollTrigger: {
+            trigger: "#about",
+            toggleActions: 'play none play reset',
         }
-
-        line.appendChild(lineWrapper);
     });
 
-    gsap.from('#about .line-content', {
-        scrollTrigger: {
-            trigger: titleSelector,
-            toggleActions: 'play reset play reset',
-        },
-        y: '100%',
-        duration: 0.5,
-        stagger: 0.25,
-    });
+    for (const line of title.lines) {
+        wrapChildren(line, 'line-content');
+    }
 
-    gsap.from('#about dt', {
-        scrollTrigger: {
-            trigger: '#about dl',
-            toggleActions: 'play reset play reset',
-        },
-        opacity: 0,
-        duration: 0.5,
-        stagger: 0.25,
-        delay: 0.5,
-    });
-
-    gsap.from('#about dd', {
-        scrollTrigger: {
-            trigger: '#about dl',
-            toggleActions: 'play reset play reset',
-        },
-        opacity: 0,
-        duration: 0.5,
-        stagger: 0.25,
-        delay: 0.5,
-    })
+    timeline
+        .from('#about .line-content', {
+            y: '100%',
+            duration: 0.5,
+            stagger: 0.25,
+        })
+        .from('#about dt', {
+            opacity: 0,
+            y: '25%',
+            duration: 0.5,
+            stagger: 0.25,
+        })
+        .from('#about dd', {
+            opacity: 0,
+            y: '25%',
+            duration: 0.5,
+            stagger: 0.25,
+        }, "<");
 </script>

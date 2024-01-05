@@ -16,6 +16,7 @@
     section {
         padding-top: var(--header-height);
         height: 100vh;
+        z-index: 2;
     }
 
     section .container {
@@ -26,7 +27,7 @@
 
     h1 {
         margin: 0 0 0 -0.6rem;
-        font-size: 8rem;
+        font-size: min(8rem, 15vw);
         font-weight: 600;
         line-height: 1;
         letter-spacing: -3px;
@@ -47,38 +48,45 @@
 
 <script>
     import { gsap } from "gsap";
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
     import SplitType from "split-type";
+    import { wrapChildren } from "../../script/script";
+
+    gsap.registerPlugin(ScrollTrigger);
 
     const title = new SplitType('#hero h1', { types: 'lines, words' });
     const subtitle = new SplitType('#hero h2', { types: 'chars' });
-
-    title.lines.forEach(line => {
-        const lineWrapper = document.createElement('div');
-        lineWrapper.classList.add('line-content');
-        line.style.overflow = 'hidden';
-
-        while (line.firstChild) {
-            lineWrapper.appendChild(line.firstChild);
-        }
-
-        line.appendChild(lineWrapper);
+    const heroButton = document.querySelector('#hero .button');
+    const timeline = gsap.timeline({
+        delay: 0.3,
     });
 
-    gsap.from('#hero .line-content', {
-        y: '100%',
-        duration: 0.5,
-        stagger: 0.25,
-        onComplete: () => {
-            title.lines.forEach(line => {
-                line.style.overflow = 'visible';
-            })
-        }
-    });
+    for (const line of title.lines) {
+        wrapChildren(line, 'line-content');
+    }
 
-    gsap.from(subtitle.chars, {
-        opacity: 0,
-        duration: 0.5,
-        stagger: 0.01,
-        delay: 0.3
+    timeline
+        .from('#hero .line-content', {
+            y: '105%',
+            duration: 0.5,
+            stagger: 0.25,
+        }).from(subtitle.chars, {
+            opacity: 0,
+            duration: 0.5,
+            stagger: 0.01,
+        }, "<");
+
+    ScrollTrigger.create({
+        trigger: '#home',
+        pin: '#hero .button',
+        pinSpacing: false,
+        start: 'top top',
+        endTrigger: '.submit-container button',
+        end: () => {
+            return `bottom +=${heroButton.offsetTop + heroButton.offsetHeight}`;
+        },
+        onToggle: self => {
+            heroButton.style.visibility = self.isActive ? 'visible' : 'hidden';
+        },
     });
 </script>

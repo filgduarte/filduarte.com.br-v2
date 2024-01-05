@@ -1,0 +1,16 @@
+---
+import FollowingCursor from '../components/home/FollowingCursor.astro';
+const { id } = Astro.props;
+---
+
+<main id={id}>
+    <FollowingCursor />
+    <slot />
+</main>
+
+<style>
+    main {
+        margin: 0 auto;
+        padding: 0 var(--default-spacing);
+    }
+</style>
