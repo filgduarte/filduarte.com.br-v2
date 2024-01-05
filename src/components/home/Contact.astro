@@ -73,56 +73,11 @@
 <script>
     import { gsap } from "gsap";
     import { ScrollTrigger } from 'gsap/ScrollTrigger';
-    import SplitType from "split-type";
-    import { wrapChildren } from '../../script/script';
-    
+    import { animateSectionTitleOnEnter } from "../../script/script";
+
     gsap.registerPlugin(ScrollTrigger);
-
-    const titleSelector = '#contact h2';
-    const title = new SplitType(titleSelector, { types: 'lines' });
-    const timeline = gsap.timeline({
-        scrollTrigger: {
-            trigger: "#contact",
-            toggleActions: 'play none play reset',
-        }
-    });
-
-    for (const line of title.lines) {
-        wrapChildren(line, 'line-content');
-    }
-
-    timeline
-        .from('#contact .line-content', {
-            y: '100%',
-            duration: 0.5,
-            stagger: 0.25,
-        })
-        .from('#contact dt', {
-            opacity: 0,
-            y: '25%',
-            duration: 0.5,
-            stagger: 0.25,
-        })
-        .from('#contact dd', {
-            opacity: 0,
-            y: '25%',
-            duration: 0.5,
-            stagger: 0.25,
-        }, "<");
     
-    gsap.from('.submit-container button', {
-        scrollTrigger: {
-            trigger: '#home',
-            start: 'top top',
-            // toggleActions: 'play none play none',
-            endTrigger: '.submit-container button',
-            end: () => {
-                const gridParent = document.querySelector('#contact .grid');
-                const submitButton = document.querySelector('.submit-container button');
-                return `bottom +=${gridParent.offsetTop + submitButton.offsetTop + submitButton.offsetHeight}`;
-            },
-            scrub: true,
-        },
-        visibility: 'hidden',
-    });
+    const sectionId = '#contact';
+
+    animateSectionTitleOnEnter(sectionId, 'h2', 'top center');
 </script>

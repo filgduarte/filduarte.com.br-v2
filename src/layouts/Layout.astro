@@ -31,6 +31,8 @@ const { title, id } = Astro.props;
 
 <script>
 	import Lenis from '@studio-freight/lenis';
+	import { gsap } from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 	const lenis = new Lenis();
 
@@ -40,4 +42,14 @@ const { title, id } = Astro.props;
 	}
 
 	requestAnimationFrame(raf);
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	document.querySelectorAll('section').forEach(section => {
+		ScrollTrigger.create({
+			trigger: section,
+			start: 'top 75%',
+			onEnter: () => lenis.scrollTo(section, {lock: true}),
+		});
+	});
 </script>

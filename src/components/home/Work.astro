@@ -136,17 +136,22 @@
 <script>
     import { gsap } from 'gsap';
     import { ScrollTrigger } from 'gsap/ScrollTrigger';
+    import { animateSectionTitleOnEnter } from "../../script/script";
 
     gsap.registerPlugin(ScrollTrigger);
+    
+    const sectionId = '#work';
+
+    animateSectionTitleOnEnter(sectionId, 'h2', 'top center');
 
     ScrollTrigger.create({
-        trigger: '#work',
+        trigger: sectionId,
         pin: '.title',
         pinSpacing: false,
         start: 'top top',
         endTrigger: '.work-list',
         end: () => {
-            const titleElement = document.querySelector('#work .title');
+            const titleElement = document.querySelector(`${sectionId} .title`);
             return `bottom +=${titleElement.offsetTop + titleElement.offsetHeight}`;
         },
     });

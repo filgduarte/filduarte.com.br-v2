@@ -60,40 +60,32 @@
 <script>
     import { gsap } from "gsap";
     import { ScrollTrigger } from 'gsap/ScrollTrigger';
-    import SplitType from "split-type";
-    import { wrapChildren } from '../../script/script';
+    import { animateSectionTitleOnEnter } from "../../script/script";
     
     gsap.registerPlugin(ScrollTrigger);
 
-    const titleSelector = '#about h2';
-    const title = new SplitType(titleSelector, { types: 'lines' });
+    const sectionId = '#about';
     const timeline = gsap.timeline({
         scrollTrigger: {
-            trigger: "#about",
+            trigger: sectionId,
+            start: 'top center',
             toggleActions: 'play none play reset',
         }
     });
 
-    for (const line of title.lines) {
-        wrapChildren(line, 'line-content');
-    }
+    animateSectionTitleOnEnter(sectionId, 'h2', 'top center');
 
     timeline
-        .from('#about .line-content', {
-            y: '100%',
-            duration: 0.5,
-            stagger: 0.25,
-        })
-        .from('#about dt', {
+        .from(`${sectionId} dt`, {
             opacity: 0,
             y: '25%',
             duration: 0.5,
-            stagger: 0.25,
+            stagger: 0.1,
         })
-        .from('#about dd', {
+        .from(`${sectionId} dd`, {
             opacity: 0,
             y: '25%',
             duration: 0.5,
-            stagger: 0.25,
+            stagger: 0.1,
         }, "<");
 </script>

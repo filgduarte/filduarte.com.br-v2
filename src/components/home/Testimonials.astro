@@ -5,3 +5,15 @@
         </div>
     </div>
 </section>
+
+<script>
+    import { gsap } from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+    import { animateSectionTitleOnEnter } from "../../script/script";
+
+    gsap.registerPlugin(ScrollTrigger);
+    
+    const sectionId = '#testimonials';
+
+    animateSectionTitleOnEnter(sectionId, 'h2', 'top center');
+</script>
