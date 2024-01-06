@@ -1,9 +1,13 @@
+---
+    import AnimatedTitle from "../AnimatedTitle.astro";
+---
+
 <section id="hero">
     <div class="container grid">
-        <h1 class="grid-element-12-col">
+        <AnimatedTitle className="grid-element-12-col" delay="0.3">
             Designer<br>
             & Developer.
-        </h1>
+        </AnimatedTitle>
         <h2 class="grid-element-4-col">
             Olá, meu nome é Filipe Duarte!<br>
             Eu torno ideias em <strong>designs atraentes</strong> e então transformo esses designs em <strong>sites funcionais e responsivos.</strong>
@@ -50,27 +54,17 @@
     import { gsap } from "gsap";
     import { ScrollTrigger } from 'gsap/ScrollTrigger';
     import SplitType from "split-type";
-    import { wrapChildren } from "../../script/script";
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const title = new SplitType('#hero h1', { types: 'lines, words' });
     const subtitle = new SplitType('#hero h2', { types: 'chars' });
     const heroButton = document.querySelector('#hero .button');
     const timeline = gsap.timeline({
         delay: 0.3,
     });
 
-    for (const line of title.lines) {
-        wrapChildren(line, 'line-content');
-    }
-
     timeline
-        .from('#hero .line-content', {
-            y: '105%',
-            duration: 0.5,
-            stagger: 0.25,
-        }).from(subtitle.chars, {
+        .from(subtitle.chars, {
             opacity: 0,
             duration: 0.5,
             stagger: 0.01,

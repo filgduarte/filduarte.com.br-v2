@@ -1,7 +1,13 @@
+---
+import AnimatedTitle from "../AnimatedTitle.astro";
+---
+
 <section id="testimonials">
     <div class="container grid">
         <div class="grid-element-5-col">
-            <h2>Algumas opiniões sinceras de pessoas que confiaram no meu trabalho.</h2>
+            <AnimatedTitle level="2">
+                Algumas opiniões sinceras de pessoas que confiaram no meu trabalho.
+            </AnimatedTitle>
         </div>
     </div>
 </section>
@@ -9,11 +15,8 @@
 <script>
     import { gsap } from 'gsap';
     import { ScrollTrigger } from 'gsap/ScrollTrigger';
-    import { animateSectionTitleOnEnter } from "../../script/script";
 
     gsap.registerPlugin(ScrollTrigger);
     
     const sectionId = '#testimonials';
-
-    animateSectionTitleOnEnter(sectionId, 'h2', 'top center');
 </script>

@@ -1,6 +1,13 @@
+---
+import AnimatedTitle from "../AnimatedTitle.astro";
+
+---
+
 <section id="work">
     <div class="container grid">
-        <h2 class="title | grid-element-5-col">Mais que trabalhos, esses projetos contam um pouco da minha história.</h2>
+        <AnimatedTitle level="2" className="title | grid-element-5-col">
+            Mais que trabalhos, esses projetos contam um pouco da minha história.
+        </AnimatedTitle>
         <div class="work-list | grid-element-12-col">
             <div class="work-item">
                 <a href="/work/filipe-duarte">
@@ -136,17 +143,14 @@
 <script>
     import { gsap } from 'gsap';
     import { ScrollTrigger } from 'gsap/ScrollTrigger';
-    import { animateSectionTitleOnEnter } from "../../script/script";
 
     gsap.registerPlugin(ScrollTrigger);
     
     const sectionId = '#work';
 
-    animateSectionTitleOnEnter(sectionId, 'h2', 'top center');
-
     ScrollTrigger.create({
         trigger: sectionId,
-        pin: '.title',
+        pin: '#work .animated-title',
         pinSpacing: false,
         start: 'top top',
         endTrigger: '.work-list',

@@ -1,0 +1,46 @@
+---
+    const { level, className, delay, ...props } = Astro.props;
+    const levelInt = parseInt(level);
+    const Element = (levelInt >= 1 && levelInt <=6) ? ('h' + level) : 'h1';
+---
+
+<Element class={`animated-title ${className}`} data-animation-delay={ delay ?? 0 } {...props}>
+    <slot />
+</Element>
+
+<script>
+    import { gsap } from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+    import SplitType from "split-type";
+    import { wrapChildren } from '../script/script';
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const animatedTitles = document.querySelectorAll('.animated-title');
+
+    function animateTitle(title) {
+        const splitedTitle = new SplitType(title, { types: 'lines' });
+
+        for (const line of splitedTitle.lines) {
+            wrapChildren(line, 'line-content');
+        }
+
+        const timeline = gsap.timeline({
+            scrollTrigger: {
+                trigger: title,
+                start: 'top center',
+                toggleActions: 'play none play reset',
+            },
+            delay: title.dataset.animationDelay,
+        });
+    
+        timeline
+            .from(title.querySelectorAll('.line-content'), {
+                y: '100%',
+                duration: 0.5,
+                stagger: 0.15,
+            });
+    }
+
+    animatedTitles.forEach(title => animateTitle(title));
+</script>
