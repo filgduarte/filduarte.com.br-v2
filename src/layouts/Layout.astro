@@ -1,9 +1,8 @@
 ---
 import '../styles/global.css';
-import Header from '../components/Header.astro';
-import Main from '../components/Main.astro';
-import Footer from '../components/Footer.astro';
-import '../components/Footer.astro';
+import Header from '../components/layout/Header.astro';
+import Main from '../components/layout/Main.astro';
+import Footer from '../components/layout/Footer.astro';
 
 const { title, id } = Astro.props;
 ---
@@ -18,6 +17,7 @@ const { title, id } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
+
 	<body>
 		<Header />
 
@@ -34,15 +34,17 @@ const { title, id } = Astro.props;
 	import { gsap } from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+	// Lenis smooth scroll
 	const lenis = new Lenis();
 
 	function raf(time) {
-		lenis.raf(time)
+		lenis.raf(time);
 		requestAnimationFrame(raf);
 	}
 
 	requestAnimationFrame(raf);
 
+	// Snap sections to top when they enter in the viewport
 	gsap.registerPlugin(ScrollTrigger);
 
 	document.querySelectorAll('section').forEach(section => {

@@ -4,15 +4,30 @@
 
 <section id="hero">
     <div class="container grid">
-        <AnimatedTitle className="grid-element-12-col" delay="0.3">
+
+        <AnimatedTitle
+            animationDelay="0.3"
+            animationStagger="0.15"
+            className="grid-element-12-col"
+        >
             Designer<br>
             & Developer.
         </AnimatedTitle>
-        <h2 class="grid-element-4-col">
+
+        <AnimatedTitle
+            level="2"
+            animationType="fadeIn"
+            animationBy="chars"
+            animationDelay="0.3"
+            animationStagger="0.01"
+            className="grid-element-4-col"
+        >
             Olá, meu nome é Filipe Duarte!<br>
             Eu torno ideias em <strong>designs atraentes</strong> e então transformo esses designs em <strong>sites funcionais e responsivos.</strong>
-        </h2>
+        </AnimatedTitle>
+
         <a href="#" class="button button--primary grid-element-3-col">Entre em contato</a>
+
     </div>
 </section>
 
@@ -53,22 +68,10 @@
 <script>
     import { gsap } from "gsap";
     import { ScrollTrigger } from 'gsap/ScrollTrigger';
-    import SplitType from "split-type";
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const subtitle = new SplitType('#hero h2', { types: 'chars' });
     const heroButton = document.querySelector('#hero .button');
-    const timeline = gsap.timeline({
-        delay: 0.3,
-    });
-
-    timeline
-        .from(subtitle.chars, {
-            opacity: 0,
-            duration: 0.5,
-            stagger: 0.01,
-        }, "<");
 
     ScrollTrigger.create({
         trigger: '#home',

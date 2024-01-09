@@ -1,11 +1,30 @@
 ---
-    const { level, className, delay, ...props } = Astro.props;
+    const {
+        level,
+        animationType,
+        animationBy,
+        animationDuration,
+        animationDelay,
+        animationStagger,
+        className,
+        ...props
+    } = Astro.props;
     const levelInt = parseInt(level);
     const Element = (levelInt >= 1 && levelInt <=6) ? ('h' + level) : 'h1';
 ---
 
-<Element class={`animated-title ${className}`} data-animation-delay={ delay ?? 0 } {...props}>
+<Element
+    data-animation-type = { animationType ?? 'slideInFromBaseline' }
+    data-animation-by = { animationBy ?? 'lines' }
+    data-animation-duration = { animationDuration ?? 0.5 }
+    data-animation-delay = { animationDelay ?? 0.3 }
+    data-animation-stagger = { animationStagger ?? 0 }
+    class = { `animated-title ${className}` }
+    {...props}
+>
+
     <slot />
+
 </Element>
 
 <script>
@@ -15,32 +34,45 @@
     import { wrapChildren } from '../script/script';
 
     gsap.registerPlugin(ScrollTrigger);
-
+    
     const animatedTitles = document.querySelectorAll('.animated-title');
+    const animations = {
+        'slideInFromBaseline' : { y: '100%' },
+        'fadeIn' : { opacity: 0 },
+    };
 
-    function animateTitle(title) {
-        const splitedTitle = new SplitType(title, { types: 'lines' });
+    function animateTitle(title, animationBy, animation) {
+        const splitedTitle = new SplitType(title, { types: `lines, ${animationBy}` });
+        let animatedElement = splitedTitle[animationBy];
 
-        for (const line of splitedTitle.lines) {
-            wrapChildren(line, 'line-content');
+        if (animationBy == 'lines') {
+            for (const line of splitedTitle.lines) {
+                wrapChildren(line, 'line-content');
+            }
+            animatedElement = title.querySelectorAll('.line-content');
         }
 
-        const timeline = gsap.timeline({
+        gsap.from(animatedElement, {
+            ...animation,
             scrollTrigger: {
                 trigger: title,
-                start: 'top center',
-                toggleActions: 'play none play reset',
-            },
-            delay: title.dataset.animationDelay,
-        });
-    
-        timeline
-            .from(title.querySelectorAll('.line-content'), {
-                y: '100%',
-                duration: 0.5,
-                stagger: 0.15,
-            });
+                toggleActions: 'restart complete none none',
+            }
+        })
     }
 
-    animatedTitles.forEach(title => animateTitle(title));
+    animatedTitles.forEach(title => {
+        const animationType = title.dataset.animationType;
+        const animationBy = title.dataset.animationBy;
+        
+        if ( animations.hasOwnProperty(animationType) ) {
+            const animation = {
+                ...animations[animationType],
+                duration: title.dataset.animationDuration,
+                delay: title.dataset.animationDelay,
+                stagger: title.dataset.animationStagger,
+            }
+            animateTitle(title, animationBy, animation);
+        }
+    });
 </script>
