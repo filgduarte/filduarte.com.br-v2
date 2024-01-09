@@ -22,9 +22,7 @@ const { title, slug, tags } = Astro.props;
         position: relative;
         width: 25%;
         aspect-ratio: 1;
-        background-image:
-            var(--_theme-noise-background),
-            var(--_thumbnail);
+        background-image: var(--_thumbnail);
         background-size: cover;
     }
 
@@ -49,7 +47,10 @@ const { title, slug, tags } = Astro.props;
         height: 100%;
         left: 0;
         top: 0;
-        background-image: linear-gradient(135deg, transparent, rgb( var(--_theme-color-accent-rgb) / 0.66 ));
+        background-image:
+            var(--_theme-noise-background), 
+            linear-gradient(135deg, transparent, var(--_theme-color-accent));
+        opacity: 0.85;
         backdrop-filter: grayscale(100%);
     }
 
@@ -62,7 +63,6 @@ const { title, slug, tags } = Astro.props;
         padding: calc(var(--default-spacing) / 2);
         color: var(--_theme-color-background);
         background-image:
-            var(--_theme-noise-background),
             linear-gradient(to bottom, transparent 33.33%, rgb(var(--_theme-color-foreground-rgb) / 0.75)),
             var(--_thumbnail);
         opacity: 0;
