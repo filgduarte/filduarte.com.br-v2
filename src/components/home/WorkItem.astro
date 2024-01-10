@@ -2,16 +2,19 @@
 const { title, slug, tags } = Astro.props;
 ---
 
-<div class="work-item" style=`--_thumbnail: url(/img/work_${slug}_thumb.webp);`>
+<div class="work-item" style={`--_thumbnail: url(/img/work_${slug}_thumb.webp);`}>
     <a href={`/work/${slug}`}>
-        <h3>{title}</h3>
-        <ul class="tag-list">
-            {
-                tags.map( tag => (
-                    <li class="tag">{tag}</li>
-                ))
-            }
-        </ul>
+        <img src={`/img/work_${slug}_thumb.webp`} alt={title} class="work-item__thumbnail" />
+        <div class="work-item__info">
+            <h3>{title}</h3>
+            <ul class="tag-list">
+                {
+                    tags.map( tag => (
+                        <li class="tag">{tag}</li>
+                    ))
+                }
+            </ul>
+        </div>
     </a>
 </div>
 
@@ -55,18 +58,11 @@ const { title, slug, tags } = Astro.props;
     }
 
     a {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
+        display: block;
         position: relative;
         height: 100%;
-        padding: calc(var(--default-spacing) / 2);
-        color: var(--_theme-color-background);
-        background-image:
-            linear-gradient(to bottom, transparent 33.33%, rgb(var(--_theme-color-foreground-rgb) / 0.75)),
-            var(--_thumbnail);
+        color: var(--_theme-color-foreground);
         opacity: 0;
-        backdrop-filter: grayscale(100%);
         transition: opacity 500ms;
         z-index: 1;
     }
@@ -74,6 +70,29 @@ const { title, slug, tags } = Astro.props;
     a:hover {
         text-decoration: none;
         opacity: 1;
+    }
+
+    .work-item__info {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: calc(var(--default-spacing) / 2);
+        width: 100%;
+        background-color: rgb( var(--_theme-color-accent-rgb) / 0.75 );
+        background-image:
+            var(--_theme-noise-background),
+            linear-gradient(135deg, rgb( var(--_theme-color-background-rgb) / 0.75 ), transparent);
+        transform-origin: top left;
+        transform: scale(0.1);
+        transition: transform 500ms ease;
+        pointer-events: none;
+    }
+
+    a:hover .work-item__info {
+        transform: scale(1);
     }
 
     h3 {
@@ -96,3 +115,20 @@ const { title, slug, tags } = Astro.props;
         background-color: var(--_theme-color-primary);
     }
 </style>
+
+<script>
+    const works = document.querySelectorAll('.work-item');
+
+    function showDescription(event) {
+        const workItem = event.currentTarget;
+        const workItemInfo = workItem.querySelector('.work-item__info');
+        const workItemBounding = workItem.getBoundingClientRect();
+
+        workItemInfo.style.top = `${event.clientY - workItemBounding.top}px`;
+        workItemInfo.style.left = `${event.clientX - workItemBounding.left}px`;
+    }
+
+    works.forEach( (workItem) => {
+        workItem.addEventListener('mousemove', showDescription);
+    })
+</script>

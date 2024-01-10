@@ -17,19 +17,19 @@ const theme = "light";
             </button>
             <ul id="main-menu">
                 <li class="main-menu__item">
-                    <a href="/#home">Início</a>
+                    <a href="/#home" class="anchor">Início</a>
                 </li>
                 <li class="main-menu__item">
-                    <a href="/#about">Sobre mim</a>
+                    <a href="/#about" class="anchor">Sobre mim</a>
                 </li>
                 <li class="main-menu__item">
-                    <a href="/#work">Meu trabalho</a>
+                    <a href="/#work" class="anchor">Meu trabalho</a>
                 </li>
                 <li class="main-menu__item">
-                    <a href="/#testimonials">Depoimentos</a>
+                    <a href="/#testimonials" class="anchor">Depoimentos</a>
                 </li>
                 <li class="main-menu__item">
-                    <a href="/#contact">Contato</a>
+                    <a href="/#contact" class="anchor">Contato</a>
                 </li>
                 <li class="main-menu__item">
                     <a href="#">{lang}</a>
@@ -177,10 +177,13 @@ const theme = "light";
 </style>
 
 <script>
-    const themeToggler = document.querySelector('.toggle-theme');
+    import { lenis } from '../../script/script';
     
-    function toggleTheme(e) {
-        e.preventDefault();
+    const themeToggler = document.querySelector('.toggle-theme');
+    const pageId = document.querySelector('main').getAttribute('id');
+    
+    function toggleTheme(event) {
+        event.preventDefault();
 
         document.body.classList.toggle('dark-mode');
         const linkText = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
@@ -190,5 +193,21 @@ const theme = "light";
         return false;
     }
 
+    function handleMenuClick(event) {
+        event.preventDefault();
+
+        const linkTargetSection = event.currentTarget.hash;
+
+        lenis.scrollTo(linkTargetSection);
+    }
+
     themeToggler.addEventListener('click', toggleTheme);
+
+    if ( pageId == 'home' ) {
+        const menuLinks = document.querySelectorAll('#main-menu .anchor');
+
+        menuLinks.forEach( (link) => {
+            link.addEventListener('click', handleMenuClick);
+        });
+    }
 </script>

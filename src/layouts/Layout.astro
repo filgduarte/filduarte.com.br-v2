@@ -28,30 +28,3 @@ const { title, id } = Astro.props;
 		<Footer />
 	</body>
 </html>
-
-<script>
-	import Lenis from '@studio-freight/lenis';
-	import { gsap } from 'gsap';
-	import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-	// Lenis smooth scroll
-	const lenis = new Lenis();
-
-	function raf(time) {
-		lenis.raf(time);
-		requestAnimationFrame(raf);
-	}
-
-	requestAnimationFrame(raf);
-
-	// Snap sections to top when they enter in the viewport
-	gsap.registerPlugin(ScrollTrigger);
-
-	document.querySelectorAll('section').forEach(section => {
-		ScrollTrigger.create({
-			trigger: section,
-			start: 'top 75%',
-			onEnter: () => lenis.scrollTo(section, {lock: true}),
-		});
-	});
-</script>
